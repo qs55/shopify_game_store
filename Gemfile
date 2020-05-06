@@ -7,7 +7,8 @@ end
 
 
 gem 'dotenv-rails'
-gem 'shopify_app'
+gem 'shopify_app', '~>9.0.4'
+gem 'shopify_api', '~>7.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
