@@ -5,11 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'font-awesome-rails'
 gem 'dotenv-rails'
-gem 'shopify_app', '~>9.0.4'
-gem 'shopify_api', '~>7.0.0'
-
+gem 'shopify_app'
+ruby '2.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record

@@ -1,6 +1,5 @@
 ShopifyApp.configure do |config|
   config.application_name = "My Shopify App"
-  config.api_version = '2019-04'
   config.api_key = ENV['api_key']
   config.secret = ENV['api_secret']
   config.old_secret = "<old_secret>"
