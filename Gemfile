@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'htmlbeautifier'
 gem 'font-awesome-rails'
 gem 'dotenv-rails'
 gem 'shopify_app'
