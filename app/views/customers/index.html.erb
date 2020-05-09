@@ -83,14 +83,14 @@
                                     <h3><span style="color:#b222b8;">Email ID</span>: <%= customer.email %></h3>
                                     <h3><span style="color:#b222b8;">Orders</span>: <%= customer.orders_count %></h3>
                                     <% if  !customer.addresses.empty? %>
-                                        <h3><span style="color:#b222b8;">Phone #</span>: <%= customer.addresses.first.address1 %></h3>
+                                        <h3><span style="color:#b222b8;">Phone #</span>: <%= customer.addresses.first.phone %></h3>
                                         <h3><span style="color:#b222b8;">Address</span>: <%= customer.addresses.first.address1 + ", " +  customer.addresses.first.city %></h3>
                                     <% else %>
                                         <h3><span style="color:#b222b8;">Phone #</span>: N/A</h3>
                                         <h3><span style="color:#b222b8;">Address </span>: N/A </h3>
                                     <% end %>
                                    
-                                    <%=  link_to "Details", {action: 'show', controller: 'customers', id: customer.id}, class: "button fit" %>
+                                    <%=  link_to "Edit Details", {action: 'show', controller: 'customers', id: customer.id}, class: "button fit" %>
 									
 								</div>
                             </div>

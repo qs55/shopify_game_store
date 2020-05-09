@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   get 'customers/index'
+  get 'customers/error_page'
   match 'customers/custom_index', :to => 'customers#custom_index', :via => [:get]
+  match 'customers/created_customers', :to => 'customers#created_customers', :via => [:get]
   resources :apps
   resources :customers
 

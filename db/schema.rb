@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200505230219) do
+ActiveRecord::Schema.define(version: 20200509005305) do
+
+  create_table "customers", force: :cascade do |t|
+    t.string "cid"
+    t.string "fname"
+    t.string "lname"
+    t.datetime "created_at", null: false
+    t.string "email_id"
+    t.string "phone"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "gender"
+    t.string "ins_comp"
+    t.string "ins_num"
+    t.string "provider"
+    t.string "card_num"
+    t.string "exp_date"
+    t.string "string"
+    t.datetime "updated_at", null: false
+    t.index ["cid"], name: "index_customers_on_cid", unique: true
+  end
 
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false

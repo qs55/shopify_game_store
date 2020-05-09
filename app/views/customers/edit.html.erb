@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Create Customer Form</title>
+    <title>Update Customer Form</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
@@ -209,15 +209,16 @@
   </head>
   <body>
     <div class="testbox">
-      <form action="/customers" class="new_customer" id="new_customer" method="post">
+      <form action="/customers/<%= @customer.cid %>" class="edit_customer" id="edit_customer_<%= @customer.cid %>" method="post">
+        <input name="_method" type="hidden" value="patch" />
         <div class="banner">
-          <h1>Customer Information Form</h1>
+          <h1>Customer Update Form</h1>
         </div>
         <p class="top-info">Thank you for your interest in working with us. Please check below for available job opportunities that meet your criteria and send your application by filling out the Job Application Form.</p>
         <div class="contact-item">
           <div class="item">
             <p>ID<span class="required">*</span></p>
-            <input type="text" name="cid"  value=<%= @customer.id %> readonly/>
+            <input type="text" name="cid"  value=<%= @customer.cid %> readonly/>
           </div>
           <div class="item">
             <p>Created At<span class="required">*</span></p>
@@ -227,60 +228,60 @@
         <div class="contact-item">
           <div class="item">
             <p>First Name<span class="required">*</span></p>
-            <input type="text" name="fname"  value=<%= @customer.first_name %> readonly/>
+            <input type="text" name="fname"  value=<%= @customer.fname %> readonly/>
           </div>
           <div class="item">
             <p>Last Name<span class="required">*</span></p>
-           <input type="text" name="lname"  value=<%= @customer.last_name %> readonly/>
+           <input type="text" name="lname"  value=<%= @customer.lname %> readonly/>
           </div>
         </div>
         <div class="contact-item">
           <div class="item">
             <p>Email<span class="required">*</span></p>
-            <input type="text" name="email_id"  value=<%= @customer.email %> readonly/>
+            <input type="text" name="email_id"  value=<%= @customer.email_id %> readonly/>
           </div>
           <div class="item">
             <p>Phone<span class="required">*</span></p>
-            <% if @customer.addresses.empty? %>
+            <% if @customer.phone.nil? %>
                 <input type="text" name="phone"  required/>
             <%else%>
-                <input type="text" name="phone"  value=<%= @customer.addresses.first.phone %> readonly/>
+                <input type="text" name="phone"  value=<%= @customer.phone %> required/>
             <% end %>
           </div>
         </div>
         <div class="contact-item">
           <div class="item">
             <p>Address<span class="required">*</span></p>
-            <% if @customer.addresses.empty? %>
+            <% if @customer.address.nil? %>
                 <input type="text" name="address"  required/>
             <%else%>
-                <input type="text" name="address"  value=<%= @customer.addresses.first.address1 %> readonly/>
+                <input type="text" name="address"  value=<%= @customer.address %> required/>
             <% end %>
           </div>
           <div class="item">
             <p>City<span class="required">*</span></p>
-           <% if @customer.addresses.empty? %>
+           <% if @customer.city.nil? %>
                 <input type="text" name="city"  required/>
             <%else%>
-                <input type="text" name="city"  value=<%= @customer.addresses.first.city %> readonly/>
+                <input type="text" name="city"  value=<%= @customer.city %> required/>
             <% end %>
           </div>
         </div>
         <div class="contact-item">
           <div class="item">
             <p>State<span class="required">*</span></p>
-            <% if @customer.addresses.empty? %>
+            <% if @customer.state.nil? %>
                 <input type="text" name="state"  required/>
             <%else%>
-                <input type="text" name="state"  value=<%= @customer.addresses.first.province %> readonly/>
+                <input type="text" name="state"  value=<%= @customer.state %> required/>
             <% end %>
           </div>
           <div class="item">
             <p>Zip<span class="required">*</span></p>
-           <% if @customer.addresses.empty? %>
+           <% if @customer.zip.nil? %>
                 <input type="text" name="zip"  required/>
             <%else%>
-                <input type="text" name="zip"  value=<%= @customer.addresses.first.zip %> readonly/>
+                <input type="text" name="zip"  value=<%= @customer.zip %> required/>
             <% end %>
           </div>
         </div>
@@ -288,15 +289,15 @@
           <p>What is your gender?<span class="required">*</span></p>
           <div class="question-answer">
             <div>
-              <input type="radio" value="Male" id="radio_1" name="gender" required/>
+              <input type="radio" value="Male" id="radio_1" name="gender" <%= @customer.gender == "Male" ? "checked" : "" %>/>
               <label for="radio_1" class="radio"><span>Male</span></label>
             </div>
             <div>
-              <input type="radio" value="Female" id="radio_2" name="gender" required/>
+              <input type="radio" value="Female" id="radio_2" name="gender" <%= @customer.gender == "Female" ? "checked" : "" %>/>
               <label for="radio_2" class="radio"><span>Female</span></label>
             </div>
             <div>
-              <input type="radio" value="Other" id="radio_3" name="gender" required/>
+              <input type="radio" value="Other" id="radio_3" name="gender" <%= @customer.gender == "Other" ? "checked" : "" %>/>
               <label for="radio_3" class="radio"><span>Other</span></label>
             </div>
           </div>
@@ -304,34 +305,42 @@
         <div class="contact-item">
           <div class="item">
             <p>Insurance Company<span class="required">*</span></p>
-            <input type="text" name="ins_comp"  required/>
+             <% if @customer.ins_comp.nil? %>
+               <input type="text" name="ins_comp"  required/>
+            <%else%>
+                <input type="text" name="ins_comp"  value=<%= @customer.ins_comp %> required/>
+            <% end %>
           </div>
           <div class="item">
             <p>Insurance Number<span class="required">*</span></p>
-            <input type="text" name="ins_num"  required/>
+            <% if @customer.ins_num.nil? %>
+               <input type="text" name="ins_num"  required/>
+            <%else%>
+                <input type="text" name="ins_num"  value=<%= @customer.ins_num %> required/>
+            <% end %>
           </div>
         </div>
         <div class="question">
           <p>Who is your Credit Crad provider?<span class="required">*</span></p>
           <div class="question-answer">
             <div>
-              <input type="radio" value="VISA" id="radio_4" name="provider" required/>
+              <input type="radio" value="VISA" id="radio_4" name="provider" <%= @customer.provider == "VISA" ? "checked" : "" %>/>
               <label for="radio_4" class="radio"><span>VISA</span></label>
             </div>
             <div>
-              <input type="radio" value="Master Card" id="radio_5" name="provider" required/>
+              <input type="radio" value="Master Card" id="radio_5" name="provider" <%= @customer.provider == "Master Card" ? "checked" : "" %>/>
               <label for="radio_5" class="radio"><span>Master Card</span></label>
             </div>
             <div>
-              <input type="radio" value="Discover" id="radio_6" name="provider" required/>
+              <input type="radio" value="Discover" id="radio_6" name="provider" <%= @customer.provider == "Discover" ? "checked" : "" %>/>
               <label for="radio_6" class="radio"><span>Discover</span></label>
             </div>
             <div>
-              <input type="radio" value="Chase" id="radio_7" name="provider" required/>
+              <input type="radio" value="Chase" id="radio_7" name="provider" <%= @customer.provider == "Chase" ? "checked" : "" %>/>
               <label for="radio_7" class="radio"><span>Chase</span></label>
             </div>
             <div>
-              <input type="radio" value="Amercian Express" id="radio_8" name="provider" required/>
+              <input type="radio" value="Amercian Express" id="radio_8" name="provider" <%= @customer.provider == "American Express" ? "checked" : "" %>/>
               <label for="radio_8" class="radio"><span>American Express</span></label>
             </div>
           </div>
@@ -339,17 +348,25 @@
         <div class="contact-item">
           <div class="item">
             <p>Credit Card Number<span class="required">*</span></p>
-            <input type="text" name="card_num" placeholder="Enter 16 digit number" required/>
+            <% if @customer.zip.nil? %>
+                <input type="text" name="card_num" placeholder="Enter 16 digit number" required/>
+            <%else%>
+                <input type="text" name="card_num" placeholder="Enter 16 digit number" value=<%= @customer.card_num %> required/>
+            <% end %>
           </div>
           <div class="item">
             <p>Exp Date<span class="required">*</span></p>
-            <input type="text" name="exp_date" placeholder="MM/YYYY"  required/>
+            <% if @customer.zip.nil? %>
+                <input type="text" name="exp_date" placeholder="MM/YYYY"  required/>
+            <%else%>
+                <input type="text" name="exp_date"  value=<%= @customer.exp_date %> required/>
+            <% end %>
           </div>
         </div>
         
         
         <div class="btn-block">
-          <button type="submit" href="/">Add customer to Database</button>
+          <button name="Commit" type="submit" Value=""Update Customer record>update</button>
         </div>
       </form>
     </div>
