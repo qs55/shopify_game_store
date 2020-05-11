@@ -1,6 +1,33 @@
 class CustomersController < AuthenticatedController
   skip_before_action :verify_authenticity_token
   before_action :set_customer, only: [:edit, :update]
+  # around_action :setup_shopify_site
+
+  # before_action :clear_and_setup_shopify_site
+
+  # def clear_and_setup_shopify_site
+  #   config = Rails.application.credentials.shopify_api
+  #   ShopifyAPI::Base.clear_session
+  #   ShopifyAPI::Base.site = "https://#{config[:api_key]}:#{config[:password]}@#{store_name}.myshopify.com/admin"
+  # end
+
+  # def setup_shopify_site
+  #   begin
+  #     api_key = ENV['api_key']
+  #     api_secret = ENV['api_secret']
+  #     store_name=Shop.first.shopify_domain
+  #     ShopifyAPI::Base.site = "https://{api_key}:{api_secret]}@{store_name}/admin"
+  #     yield
+  #   ensure
+  #     ShopifyAPI::Base.clear_session
+  #   end
+  # end
+
+  # def setup_shopify_site
+  #   shop_url = "https://#{ENV['api_key']}:#{ENV['api_secret']}@SHOP_NAME.myshopify.com/admin"
+  #   ShopifyAPI::Base.site = shop_url
+  # end
+  
 
   def index
     @customers = ShopifyAPI::Customer.find(:all)
