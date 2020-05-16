@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
 
+
+  post '/webhooks/orders_create', :to => 'custom_webhooks#orders_create'
+  post '/webhooks/orders_update', :to => 'custom_webhooks#orders_update'
+  post '/webhooks/orders_paid', :to => 'custom_webhooks#orders_paid'
+
   get 'proxy/index'
 
   get 'customers/index'
   get 'customers/error_page'
+
   match 'customers/custom_index', :to => 'customers#custom_index', :via => [:get]
   match 'customers/created_customers', :to => 'customers#created_customers', :via => [:get]
   resources :apps
   resources :customers
+  resources :orders
 
 
   get 'home/index'

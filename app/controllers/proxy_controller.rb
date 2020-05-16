@@ -1,6 +1,7 @@
 class ProxyController < ApplicationController
+  include ShopifyApp::AppProxyVerification
   def index
-    @customer = Customer.first
+    @customer = Customer.last
     render json: @customer
   end
 end
