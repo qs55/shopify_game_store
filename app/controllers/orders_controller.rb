@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   layout 'application', :except => :index
   def index
     @orders = Order.all
+    # render layout: false, content_type: 'application/liquid'
   end
 
   def show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200515211049) do
+ActiveRecord::Schema.define(version: 20200609014031) do
 
   create_table "customers", force: :cascade do |t|
     t.string "cid"
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 20200515211049) do
     t.string "pid"
     t.string "pname"
     t.integer "quantity"
-    t.string "line1"
-    t.string "line2"
-    t.string "line3"
+    t.string "glass_type"
+    t.string "lense_type"
+    t.string "glass_material"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
@@ -58,12 +58,37 @@ ActiveRecord::Schema.define(version: 20200515211049) do
     t.index ["oid"], name: "index_orders_on_oid", unique: true
   end
 
+  create_table "product_variations", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "variation"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_variations_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "lense"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
     t.string "shopify_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
+  end
+
+  create_table "variation_types", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "material"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_variation_types_on_product_id"
   end
 
 end

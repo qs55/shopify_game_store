@@ -21,11 +21,17 @@ class CustomWebhooksController < ApplicationController
             index = 1
             item[:properties].each do |cust|
                 if index == 1
-                    @line_item.line1 =  cust[:name] + ":" + cust[:value]
+                    # @line_item.line1 =  cust[:name] + ":" + cust[:value]
+                    @line_item.glass_type =  cust[:value]
+
                 elsif index == 2
-                    @line_item.line2 =  cust[:name] + ":" + cust[:value]
+                    # @line_item.line2 =  cust[:name] + ":" + cust[:value]
+                    @line_item.lense_type =  cust[:value]
+
                 else
-                    @line_item.line3 =  cust[:name] + ":" + cust[:value]
+                    # @line_item.line3 =  cust[:name] + ":" + cust[:value]
+                    @line_item.glass_material =  cust[:value]
+
                 end
                 
                 index = index + 1

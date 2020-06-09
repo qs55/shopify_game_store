@@ -10,9 +10,9 @@ ShopifyApp.configure do |config|
   config.session_repository = Shop
 
   config.webhooks = [
-    {topic: 'orders/create', address: 'https://7c1a176d.ngrok.io/webhooks/orders_create', format: 'json'},
-    {topic: 'orders/updated', address: 'https://7c1a176d.ngrok.io/webhooks/orders_update', format: 'json'},
-    {topic: 'orders/paid', address: 'https://7c1a176d.ngrok.io/webhooks/orders_paid', format: 'json'}
+    {topic: 'orders/create', address: 'https://92cab46023ad.ngrok.io/webhooks/orders_create', format: 'json'},
+    {topic: 'orders/updated', address: 'https://92cab46023ad.ngrok.io/webhooks/orders_update', format: 'json'},
+    {topic: 'orders/paid', address: 'https://92cab46023ad.ngrok.io/webhooks/orders_paid', format: 'json'}
   ]
 
 end
