@@ -76,7 +76,7 @@
 	}
 
 	body {
-		background: #202024;
+		background:whitesmoke ;
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -541,7 +541,7 @@
 	.box {
 		border-radius: 4px;
 		margin-bottom: 2em;
-		background: #2c2c32;
+		
 		text-align: center;
 	}
 

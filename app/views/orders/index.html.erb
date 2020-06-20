@@ -1,6 +1,6 @@
 <style>
 .dropbtn {
-    background-color: #b83e9e87;
+    background-color:#6f92b5;
     color: white;
     font-size: 20px;
     border: none;
@@ -8,7 +8,7 @@
     }
 
     .dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
+    background-color: black;
     }
 
     #myInput {
@@ -46,14 +46,50 @@
     display: block;
     }
 
+    .success {
+  background-color: rosybrown;
+
+}
+
     .dropdown a:hover {background-color: #ddd;}
 
     .show {display: block;}
+
+    
+    .show {display: block;}
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #6f92b5;
+  color: black;
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.round {
+  border-radius: 50%;}
 </style>
 <div class="main">
-  <center><h1>All Customers</h1></center>
+  <center><h1 style="font-size:1.50em;">Confirmed Orders</h1></center>
 
-  <%= link_to 'Back to Games', {controller: "apps", action: "index"},{:class => :dropbtn  } %>
+  <%= link_to 'Back', {controller: "apps", action: "index"},{:class => :previous  } %>
+  
+  <div class="success">
+    <br><p style="color:black; font-family:cursive;"><strong>NOTE: </strong> These orders and their details are coming from Shopify. Once the order and payment is confirmed, the orders details will automatically appear in our custom app.  </p>
+  </div>
 
   <% i=0 %>
   <table class="table table-dark table-striped">
@@ -61,17 +97,17 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Order Id</th>
-        <th scope="col">Order NUmber </th>
+        <th scope="col">Order Number </th>
         <th scope="col">Customer ID </th>
-        <th scope="col">Customer Fname </th>
-        <th scope="col">CustomerEmail</th>
-        <th colspan="2" scope="col">Options</th>
+        <th scope="col">Customer Name </th>
+        <th scope="col">Customer Email</th>
+        <th colspan="2" scope="col">Actions</th>
       </tr>
     </thead>
 
 
     <% @orders.each do |order| %>
-    <tr>
+    <tr style="color:black; ">
       <th scope="row"><%= i=i+1 %></th>
       <td><%= order.oid %></td>
       <td><%= order.onum %></td>
@@ -79,7 +115,7 @@
       <td><strong><%= order.cfname %> </strong></td>
       <td><strong><%= order.cemail %> </strong></td>
       <td><%= link_to 'Show', order_path(order.id) %></td>
-      <td><%= link_to 'Destroy', order_path(order.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', order_path(order.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
   </table>

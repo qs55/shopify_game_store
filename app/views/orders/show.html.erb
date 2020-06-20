@@ -1,6 +1,6 @@
 <style>
 .dropbtn {
-    background-color: #b83e9e87;
+    background-color: #6f92b5;
     color: white;
     font-size: 20px;
     border: none;
@@ -8,7 +8,7 @@
     }
 
     .dropbtn:hover, .dropbtn:focus {
-    background-color: #3e8e41;
+    background-color: black;
     }
 
     #myInput {
@@ -46,18 +46,52 @@
     display: block;
     }
 
+        .success {
+  background-color: rosybrown;
+
+}
+
     .dropdown a:hover {background-color: #ddd;}
 
     .show {display: block;}
+
+    a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #6f92b5;
+  color: black;
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.round {
+  border-radius: 50%;}
+
 </style>
 
- <%= link_to 'Back to Orders', {controller: "orders", action: "index"},{:class => :dropbtn  } %>
+ <center><h1 style="font-size:1.50em;">Order Details</h1></center>
 
-<h2> This Order has total <%= @order_products.count%> products </h2>
-<h3> Details are in the table below </h3>
+ <%= link_to 'Back', {controller: "orders", action: "index"},{:class => :previous  } %>
 
-<table class="table">
-  <thead class="thead-dark">
+<h2> This Order has total of <%= @order_products.count%> <%= @order_products.count == 1 ? "product" : "products" %></h2>
+  <div class="success">
+    <p style="color:black; font-family:cursive;"><strong>NOTE: </strong> These are order details and belong to one particular order that we just clicked. It also contains the customization infomration that we did on Shopify.  </p>
+  </div>
+
+<table class="table table-dark table-striped">
+    <thead style="background-color: rosybrown;" >
     <tr>
       <th scope="col">#</th>
       <th scope="col">Product ID</th>
@@ -70,10 +104,10 @@
     </tr>
   </thead>
 
-  <tbody style="background-color:#8f6bc9;">
+  <tbody style="background-color:white;">
     <% i = 0%>
     <% @order_products.each do |line_item| %>
-    <tr>
+    <tr style="color:black; font-weight:400;">
       <th scope="row"><%= i += 1 %></th>
       <td><%= line_item.pid %></td>
       <td><%= line_item.pname %></td>

@@ -9,7 +9,7 @@ class CustomWebhooksController < ApplicationController
         @order.onum = params[:number]
         @order.cid =  params[:customer][:id]
         @order.cemail = params[:customer][:email]
-        @order.cfname =  params[:customer][:first_name]
+        @order.cfname =  params[:customer][:first_name] + " " + params[:customer][:last_name]
         @order.save
 
         params[:line_items].each do |item|
